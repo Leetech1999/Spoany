@@ -11,10 +11,6 @@
       content="telephone=no, address=no, email=no"
     />
     <title>SPOANY</title>
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-      <script>
-    Kakao.init('01dfe93cd8047528da7e253f1baee5cd');
-  </script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="./js/jquery.mousewheel.js"></script>
@@ -763,7 +759,7 @@ $('.close_btn').on('click', function () {
       </footer>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01dfe93cd8047528da7e253f1baee5cd"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01dfe93cd8047528da7e253f1baee5cd" onload="initMap()"></script>
     <script>
 const swiper1 = new Swiper("#mainBannerSwiper", {
   spaceBetween: 0,
@@ -836,7 +832,8 @@ function toggleMallSwiper() {
 toggleMallSwiper();
 window.addEventListener("resize", toggleMallSwiper);
 
-   const locations = [
+  function initMap() {
+    const locations = [
       { lat: 37.476070, lng: 126.882256, title: "서울 금천구 가산동 772 지하 1층" },
       { lat: 37.482059, lng: 126.884512, title: "서울 금천구 벚꽃로 286 (삼성리더스타워) 지하 1층" },
       { lat: 37.557957, lng: 126.849140, title: "서울 강서구 양천로 510 등촌동, 현대프린스텔" },
@@ -849,6 +846,7 @@ window.addEventListener("resize", toggleMallSwiper);
       center: new kakao.maps.LatLng(37.5665, 126.9780),
       level: 7
     };
+
     const map = new kakao.maps.Map(mapContainer, mapOption);
     const bounds = new kakao.maps.LatLngBounds();
 
@@ -872,6 +870,7 @@ window.addEventListener("resize", toggleMallSwiper);
     });
 
     map.setBounds(bounds);
+  }
     </script>
   </body>
 </html>
