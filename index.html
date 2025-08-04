@@ -758,7 +758,8 @@ $('.close_btn').on('click', function () {
         </div>
       </footer>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=01dfe93cd8047528da7e253f1baee5cd&autoload=false"></script>
     <script>
 const swiper1 = new Swiper("#mainBannerSwiper", {
   spaceBetween: 0,
@@ -831,7 +832,7 @@ function toggleMallSwiper() {
 toggleMallSwiper();
 window.addEventListener("resize", toggleMallSwiper);
 
-  function initMap() {
+function initMap() {
     const locations = [
       { lat: 37.476070, lng: 126.882256, title: "서울 금천구 가산동 772 지하 1층" },
       { lat: 37.482059, lng: 126.884512, title: "서울 금천구 벚꽃로 286 (삼성리더스타워) 지하 1층" },
@@ -870,8 +871,12 @@ window.addEventListener("resize", toggleMallSwiper);
 
     map.setBounds(bounds);
   }
+
+  window.onload = function() {
+    kakao.maps.load(function() {
+      initMap();
+    });
+  };
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01dfe93cd8047528da7e253f1baee5cd" onload="initMap()"></script>
   </body>
 </html>
