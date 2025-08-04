@@ -1,0 +1,11 @@
+﻿@font-face {
+	font-family: Dotum_L;
+	src: url(~~~.eot); /* IE 6~8, IE9+ 호환성보기 */
+	src: local(Dotum_L),
+	url(~~~.eot?#iefix) format('embedded-opentype'),
+	url(~~~.woff) format('woff2'), /* WOFF시험 버전 */
+	url(~~~.woff) format('woff'), /* 표준 브라우저 */
+	url(~~~.ttf) format('truetype');
+	font-style: normal;
+	font-weight: normal;
+}

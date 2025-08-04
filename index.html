@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <meta
+      name="format-detectoin"
+      content="telephone=no, address=no, email=no"
+    />
+    <title>SPOANY</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="./js/jquery.mousewheel.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+      rel="stylesheet"
+    />
+    <script src="./js/script.js"></script>
+<script>
+  $(document).ready(function () {
+    $(".sub, .sub_bg").hide();
+    let isHoverBound = false;
+
+
+    function bindHover() {
+      const winWidth = $(window).width();
+
+      if (winWidth >= 1400) {
+        if (!isHoverBound) {
+          $(".gnb_wrapper")
+            .on("mouseenter", function () {
+              $(".sub").stop().slideDown(300);
+              $(".sub_bg").stop().slideDown(300);
+            })
+            .on("mouseleave", function () {
+              $(".sub").stop().slideUp(300);
+              $(".sub_bg").stop().slideUp(300);
+            });
+          isHoverBound = true;
+        }
+      } else {
+        if (isHoverBound) {
+          $(".gnb_wrapper").off("mouseenter mouseleave");
+          $(".sub, .sub_bg").stop().slideUp(0);
+          isHoverBound = false;
+        }
+      }
+    }
+
+    function bindSubMenuToggle() {
+      if ($(window).width() < 1400) {
+        $(".gnb > ul > li > a")
+          .off("click")
+          .on("click", function (event) {
+            event.preventDefault();
+            const $subMenu = $(this).next(".sub");
+
+            if ($subMenu.is(":visible")) {
+              $subMenu.slideUp();
+            } else {
+              $(".sub:visible").slideUp();
+              $subMenu.slideDown();
+            }
+          });
+      } else {
+        $(".gnb > ul > li > a").off("click");
+        $(".sub").hide();
+      }
+    }
+
+    $(window).on("resize", function () {
+      bindHover();
+      bindSubMenuToggle();
+    });
+
+    bindHover();
+    bindSubMenuToggle();
+
+    $(".togglebtn").on("click", function () {
+      $(".gnb_wrapper").toggleClass("on");
+      $(this).toggleClass("on");
+    });
+
+    $('.ul_box a:contains("간략히보기")').on('click', function (e) {
+  e.preventDefault();
+
+  const $li = $(this).closest('li');
+
+  const title = $li.find('span').eq(0).find('p').text();
+  const address = $li.find('span').eq(1).text();
+  const phone = $li.find('span').eq(2).find('p').text();
+
+  $('.briefly h2').text(`${title} / ${phone}`);
+  $('.briefly').addClass('on');
+});
+$('.close_btn').on('click', function () {
+  $('.briefly').removeClass('on');
+});
+
+  });
+</script>
+
+  </head>
+  <body>
+    <header id="main_header">
+      <div class="header_top">
+        <a href="#">가맹문의</a>
+        <h1><a href="#">SPOANY 메인로고</a></h1>
+        <button type="button" class="togglebtn">토글버튼(햄버거)</button>
+        <nav class="tnb">
+          <ul>
+            <li><a href="#">로그인</a></li>
+            <li><a href="#">회원가입</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="gnb_wrapper">
+        <h2>MENU</h2>
+        <nav class="gnb">
+          <ul>
+            <li>
+              <a href="#">스포애니</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">스포애니 소개</a></li>
+                  <li><a href="#">회사소개</a></li>
+                  <li><a href="#">Chairman 메세지</a></li>
+                  <li><a href="#">히스토리</a></li>
+                  <li><a href="#">브랜드 안내</a></li>
+                  <li><a href="#">브랜드 아이덴티티</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">프로그램</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">그룹 엑서사이즈</a></li>
+                  <li><a href="#">운동정보</a></li>
+                  <li><a href="#">홈트레이닝</a></li>
+                  <li><a href="#">데일리 프로그램</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">트레이닝 정보</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">트레이닝 정보</a></li>
+                  <li><a href="#">퍼스널 트레이닝</a></li>
+                  <li><a href="#">스페셜 프로그램</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">홍보관</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">뉴스</a></li>
+                  <li><a href="#">언론홍보</a></li>
+                  <li><a href="#">칭찬게시판</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">고객센터</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">제휴문의</a></li>
+                  <li><a href="#">제휴업체 특가</a></li>
+                  <li><a href="#">자주묻는 질문</a></li>
+                  <li><a href="#">마이페이지</a></li>
+                  <li><a href="#">1:1문의/건의</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">채용</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">채용안내</a></li>
+                  <li><a href="#">지원하기</a></li>
+                  <li><a href="#">인재육성</a></li>
+                  <li><a href="#">트레이너 인턴쉽</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="#">전문트레이닝</a>
+              <div class="sub">
+                <ul>
+                  <li><a href="#">ACSM C.P.T</a></li>
+                  <li><a href="#">코치 아카데미</a></li>
+                  <li><a href="#">IFBB 어드벤스</a></li>
+                  <li><a href="#">기능성 트레이닝</a></li>
+                  <li><a href="#">스포츠 지도사</a></li>
+                  <li><a href="#">그외 다양한 교육</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+          <nav class="tm_tnb">
+            <ul>
+              <li><a href="#">spoAny Mall</a></li>
+              <li><a href="#">회원권 신청</a></li>
+              <li><a href="#">빠른 상담</a></li>
+              <div class="tm">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+              </div>
+            </ul>
+          </nav>
+        </nav>
+        <div class="sub_bg"></div>
+      </div>
+    </header>
+    <nav id="top_btn">
+      <a href="#">회원권신청</a>
+      <a href="#"><img src="/img/phone_img.png" alt="phone_img"><p>빠른상담</p></a>
+      <a href="#"><p>TOP</p><img src="/img/up_btn.png" alt="top_arrow"></a>
+    </nav>
+    <main id="wrap">
+      <section id="content1">
+        <div class="swiper mySwiper" id="mainBannerSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <img src="./img/main_banner_img1.jpg" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./img/main_banner_img2.jpg" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./img/main_banner_img3.jpg" alt="" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./img/main_banner_img4.jpg" alt="" />
+            </div>
+          </div>
+          <div class="swiper_btn">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+      <section id="content2">
+        <div class="info_wrap">
+          <div class="open_wrap">
+            <h2>SPOANY INFO</h2>
+            <ul>
+              <li><a href="#">스포애니 스마트 까치산역점 OPEN<span><img src="./img/arrow.png"></span></a></li>
+              <li><a href="#">114호점 남구로점 Grand Open<img src="./img/arrow.png"></span></a></li>
+              <li><a href="#">113호점 종각역점 Grand Open<img src="./img/arrow.png"></span></a></li>
+              <li><a href="#">112호점 신정네거리역점 Grand Open<img src="./img/arrow.png"></span></a></li>
+              <li><a href="#">110호점 간석오거리역점 Grand Open<img src="./img/arrow.png"></span></a></li>
+            </ul>
+          </div>
+          <div class="card_wrap">
+            <div class="card">
+              <a href="#">
+                <img src="./img/card2.png" alt="" />
+                <span>
+                  <p>피트니스 업계 최초</p>
+                  <p>신한카드 Simple+(스포애니)</p>
+                  <p>만나보세요 !</p>
+                </span>
+              </a>
+            </div>
+            <div class="news">
+              <h3>SPOANY NEWS</h3>
+              <ul>
+                <li>
+                  <a href="#"
+                    ><span>[GRAND OPEN] 스포애니 114호점 남구로점 오픈! [GRAND OPEN] 스포애니 114호점 남구로점 오픈!</span
+                    ><span>2025.03.24</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      >[공모전] 스포애니송 챌린지 공모전 안내! 최대 15 [공모전] 스포애니송 챌린지 공모전 안내! 최대 15...</span
+                    ><span>2025.02.15</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span>[NEW] 피트니스의 혁신을 구독하다!"스포애니 [NEW] 피트니스의 혁신을 구독하다!"스포애니...</span
+                    ><span>2025.03.04</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span>[GRAND OPEN] 스포애니 113호점 종각역점 오픈! [GRAND OPEN] 스포애니 113호점 종각역점 오픈!</span
+                    ><span>2025.03.18</span></a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      >[앰버서더] 2025년 스포애니 공식 앰버서더 모집! [앰버서더] 2025년 스포애니 공식 앰버서더 모집!...</span
+                    ><span>2025.04.01</span></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="black_bg">
+          <div class="view_wrap">
+            <div class="interview_wrap">
+              <div class="view_top">
+                <h3>
+                  SPOANY TV
+                  <p>인터뷰</p>
+                </h3>
+                <a href="#">더보기</a>
+              </div>
+              <div class="youtube_wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/iXaX7E_L7PE"
+                  frameborder="0"
+                  allowfullscreen
+                  >></iframe
+                >
+              </div>
+            </div>
+            <div class="notice_wrap">
+              <div class="view_top">
+                <h3>
+                  SPOANY
+                  <p>칭찬게시판</p>
+                </h3>
+                <a href="#">더보기</a>
+              </div>
+              <div id="news_board">
+                <ul>
+                  <li>
+                    <p>스포애니 등촌점 김민*PT팀장님...</p>
+                    <p>
+                      서울사는 직장인입니다. 계속되는 야근, 주말 특근에 두달간
+                      운동을 내려놨었습니다...
+                      서울사는 직장인입니다. 계속되는 야근, 주말 특근에 두달간
+                      운동을 내려놨었습니다...
+                      서울사는 직장인입니다. 계속되는 야근, 주말 특근에 두달간
+                      운동을 내려놨었습니다...
+                    </p>
+                    <p>이주* | 2019.10.16</p>
+                  </li>
+                  <li>
+                    <p>운동의 재미를 알게 해준 스포애니</p>
+                    <p>
+                      평소 자전거를 즐겨탔습니다. 로드자전거로 미친듯이 페달을
+                      밟을 때 그 느낌이...
+                      평소 자전거를 즐겨탔습니다. 로드자전거로 미친듯이 페달을
+                      밟을 때 그 느낌이...
+                      평소 자전거를 즐겨탔습니다. 로드자전거로 미친듯이 페달을
+                      밟을 때 그 느낌이...
+                    </p>
+                    <p>서현* | 2019.09.27</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="content3">
+        <div class="swiper mySwiper" id="eventBannerSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="#"></a>
+              <picture>
+                <source media="(max-width:767px)" srcset="/img/mobile_event_banner1.png"/>
+                <img src="./img/event_banner1.jpg" alt="" />
+              </picture>
+            </a>
+            </div>
+            <div class="swiper-slide">
+                            <a href="#"></a>
+              <picture>
+                <source media="(max-width:767px)" srcset="/img/mobile_event_banner2.png"/>
+                <img src="./img/event_banner2.jpg" alt="" />
+              </picture>
+            </a>
+            </div>
+            <div class="swiper-slide">
+                            <a href="#"></a>
+              <picture>
+                <source media="(max-width:767px)" srcset="/img/mobile_event_banner3.png"/>
+                <img src="./img/event_banner3.jpg" alt="" />
+              </picture>
+            </a>
+            </div>
+          </div>
+          <div class="swiper_btn2">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+      <section id="content4">
+        <div class="mall_wrap">
+          <div class="mall2_wrap1">
+            <div class="mall_top">
+              <h2><img src="./img/spoanymall_logo.png" alt="" /></h2>
+              <a href="#"><b>더 많은 제품 보러가기</b><img src="./img/arrow.png" alt="arrow"></a>
+            </div>
+            <div class="mall_img_wrap1 swiper mySwiper" id="mallBannerSwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall_img1.png" alt="" />
+                      <figcaption>
+                        <p>OS1st WS6 강력한 손목보호대</p>
+                        <p><strong>일반가 35,000원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall_img2.png" alt="" />
+                      <figcaption>
+                        <p>OS1st FS6 강력한 발목 보호대</p>
+                        <p><strong>일반가 55,000원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall_img3.png" alt="" />
+                      <figcaption>
+                        <p>맥스큐 남성 여성용 헬스장갑</p>
+                        <p><strong>일반가 17,500원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+                <div class="swiper-slide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall_img4.jpg" alt="" />
+                      <figcaption>
+                        <p>맥스큐 파워글러브 고급형</p>
+                        <p><strong>일반가 30,000원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </div>
+              </div>
+           <div class="swiper_btn">
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+          </div>
+            </div>
+          </div>
+          <div class="mall2_wrap2">
+            <div class="mall_top">
+              <h2>
+                <span>오직 스포애니에서만 !</span> 운동 전 부스터들은 헬스장에서
+                직접 만나보세요!
+              </h2>
+              <a href="#">
+                <b>더 많은 제품 보러가기</b>
+                <img src="/img/arrow.png" alt="arrow">
+              </a>
+            </div>
+            <div class="mall_img_wrap2">
+              <ul>
+                <li>
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall2_img1.png" alt="" />
+                      <figcaption>
+                        <p>
+                          익시트림 이온에너지 타우린200mg<br />무카페인 수분충전
+                          레몬맛 20포
+                        </p>
+                        <p><strong>일반가 17,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall2_img2.png" alt="" />
+                      <figcaption>
+                        <p>
+                          익스트림 블랙마카 1000mg 포도맛<br />젤리스틱 10포
+                        </p>
+                        <p><strong>일반가 22,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall2_img3.png" alt="" />
+                      <figcaption>
+                        <p>
+                          익스트림 아르기닌 단백질 젤리스틱<br />포도맛 14포
+                        </p>
+                        <p><strong>일반가 23,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall2_img4.png" alt="" />
+                      <figcaption>
+                        <p>
+                          익스트림 천연카페인 120mg 아르<br />기닌 30mg
+                          타우린2000mg...
+                        </p>
+                        <p><strong>일반가 26,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+                <li class="desktop_hide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall3_img1.jpg" alt="" />
+                      <figcaption>
+                        <p>
+                          익스트림 천연카페인 120mg 아르<br />기닌 30mg
+                          타우린2000mg...
+                        </p>
+                        <p><strong>일반가 26,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+                <li class="desktop_hide">
+                  <a href="#">
+                    <figure>
+                      <img src="./img/mall3_img2.jpg" alt="" />
+                      <figcaption>
+                        <p>
+                          익스트림 천연카페인 120mg 아르<br />기닌 30mg
+                          타우린2000mg...
+                        </p>
+                        <p><strong>일반가 26,900원</strong></p>
+                      </figcaption>
+                    </figure>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="content5">
+        <div class="briefly">
+          <span class="briefly_top">
+            <h2>가산동점 PRO / 02-857-9618</h2>
+            <button type="button" class="close_btn">닫기</button>
+          </span>
+          <img src="./img/map_info.png" alt="" />
+        </div>
+        <div class="map_wrap">
+          <div class="map_img_box" id="map_img_box">
+          </div>
+          <div class="map_info">
+            <h3>스포애니 지점찾기</h3>
+            <div class="sel_box">
+              <div class="select_box">
+                <select id="city" name="city">
+                  <option value="" selected class="first">도시 선택</option>
+                  <option value="서울">서울</option>
+                  <option value="인천">인천</option>
+                  <option value="경기">경기</option>
+                </select>
+                <select id="city" name="city">
+                  <option value="" selected class="first">구 선택</option>
+                </select>
+              </div>
+              <div class="input_box">
+                <div id="search_wrap">
+                  <input
+                    type="text"
+                    name="searchbox"
+                    id="searchbox"
+                    placeholder="검색어 입력"
+                  />
+                  <button type="button" class="search_btn">
+                    <img src="img/dotbogi.png" alt="" />
+                  </button>
+                </div>
+                <button type="button" class="reset_btn">검색초기화</button>
+              </div>
+            </div>
+            <div class="ul_box">
+              <ul>
+                <li>
+                  <span>
+                    <p>가산동점Pro(프로)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 금천구 가산동772 지하 1층</span>
+                  <span>
+                    <p>02-857-9618</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>가산디지털단지역점Pro(구독서비스)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span
+                    >서울 금천구 벚꽃로 286(가산동,삼성리더스타워)지하1층</span
+                  >
+                  <span>
+                    <p>02-855-9618</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>가양역점Pro(프로)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 강서구 양천로 510 등촌동,현대프린스텔</span>
+                  <span>
+                    <p>02-3663-9618</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>간석오거리역점Pro(프로)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>인천 남동구 간석동211-3 5층,6층</span>
+                  <span>
+                    <p>032-423-9618</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>강남역1호점(피트니스)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 강남구 강남대로78길8 한국빌딩 B2층</span>
+                  <span>
+                    <p>02-556-2558</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>강남역1호점(피트니스)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 강남구 강남대로78길8 한국빌딩 B2층</span>
+                  <span>
+                    <p>02-556-2558</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>강남역1호점(피트니스)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 강남구 강남대로78길8 한국빌딩 B2층</span>
+                  <span>
+                    <p>02-556-2558</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <p>강남역1호점(피트니스)</p>
+                    <a href="#">상세보기</a>
+                  </span>
+                  <span>서울 강남구 강남대로78길8 한국빌딩 B2층</span>
+                  <span>
+                    <p>02-556-2558</p>
+                    <a href="#">간략히보기</a>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer id="content6">
+        <div class="footer_wrap">
+          <div class="footer_top">
+            <ul>
+              <li><a href="#">회사소개</a></li>
+              <li><a href="#">개인정보처리방침</a></li>
+              <li>
+                <select name="company" id="company">
+                  <option value="" selected>지점바로가기</option>
+                  <option value="역곡역점 필라테스">역곡역점 필라테스</option>
+                  <option value="합정역점 필라테스">합정역점 필라테스</option>
+                </select>
+              </li>
+              <li>
+                <select name="familysite" id="familysite">
+                  <option value="familysite" selected>Familysite</option>
+                  <option value="스포애니몰">스포애니몰</option>
+                  <option value="가맹상담 바로가기">가맹상담 바로가기</option>
+                </select>
+              </li>
+            </ul>
+            </div>
+            <div class="footer_bottom">
+              <address>(주)케이디헬스케어</address>
+              <address>
+                <p>서울 특별시 송파구 충민로10, 5층 E13 (문정동, 가든파이브툴) </p>
+                <p>사업자등록번호 : 129-86-66817 </p>
+                <p>대표이사 : 이규정</p>
+              </address>
+              <address>&copy; 2018 kdsports. All rights reserved</address>
+            </div>
+          <div class="footer_sns">
+            <ul>
+              <li>
+                <a href="#"><img src="./img/kakao_logo.png" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/facebook_logo.png" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/insta_logo.png" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/blog_logo.png" alt="" /></a>
+              </li>
+              <li>
+                <a href="#"><img src="./img/youtube_logo.png" alt="" /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01dfe93cd8047528da7e253f1baee5cd"></script>
+    <script>
+const swiper1 = new Swiper("#mainBannerSwiper", {
+  spaceBetween: 0,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5500,
+    disableOnInteraction: false,
+  },
+  loop: true,
+  pagination: {
+    el: "#mainBannerSwiper .swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: "#mainBannerSwiper .swiper-button-next",
+    prevEl: "#mainBannerSwiper .swiper-button-prev",
+  },
+});
+
+const swiper2 = new Swiper("#eventBannerSwiper", {
+  spaceBetween: 0,
+  centeredSlides: true,
+  autoplay: {
+    delay: 5500,
+    disableOnInteraction: false,
+  },
+  loop: true,
+  pagination: {
+    el: "#eventBannerSwiper .swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: "#eventBannerSwiper .swiper-button-next",
+    prevEl: "#eventBannerSwiper .swiper-button-prev",
+  },
+});
+
+const mallContainer = document.querySelector("#mallBannerSwiper");
+let mallSwiper = null;
+
+function toggleMallSwiper() {
+  if (window.innerWidth < 1040) {
+    if (!mallSwiper) {
+      mallSwiper = new Swiper(mallContainer, {
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: {
+          delay: 5500,
+          disableOnInteraction: false,
+        },
+        loop: true,
+        pagination: {
+          el: "#mallBannerSwiper .swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: "#mallBannerSwiper .swiper-button-next",
+          prevEl: "#mallBannerSwiper .swiper-button-prev",
+        },
+      });
+    }
+  } else {
+    if (mallSwiper) {
+      mallSwiper.destroy(true, true);
+      mallSwiper = null;
+    }
+  }
+}
+
+toggleMallSwiper();
+window.addEventListener("resize", toggleMallSwiper);
+
+   const locations = [
+      { lat: 37.476070, lng: 126.882256, title: "서울 금천구 가산동 772 지하 1층" },
+      { lat: 37.482059, lng: 126.884512, title: "서울 금천구 벚꽃로 286 (삼성리더스타워) 지하 1층" },
+      { lat: 37.557957, lng: 126.849140, title: "서울 강서구 양천로 510 등촌동, 현대프린스텔" },
+      { lat: 37.456913, lng: 126.711244, title: "인천 남동구 간석동 211-3 5층,6층" },
+      { lat: 37.502128, lng: 127.026668, title: "서울 강남구 강남대로78길 8 한국빌딩 B2층" }
+    ];
+
+    const mapContainer = document.getElementById('map_img_box');
+    const mapOption = {
+      center: new kakao.maps.LatLng(37.5665, 126.9780),
+      level: 7
+    };
+    const map = new kakao.maps.Map(mapContainer, mapOption);
+    const bounds = new kakao.maps.LatLngBounds();
+
+    locations.forEach(loc => {
+      const coords = new kakao.maps.LatLng(loc.lat, loc.lng);
+      const marker = new kakao.maps.Marker({
+        position: coords,
+        map: map,
+        title: loc.title
+      });
+
+      const infowindow = new kakao.maps.InfoWindow({
+        content: `<div style="padding:5px;">${loc.title}</div>`
+      });
+
+      kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+      });
+
+      bounds.extend(coords);
+    });
+
+    map.setBounds(bounds);
+    </script>
+  </body>
+</html>
