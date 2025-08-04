@@ -1763,7 +1763,7 @@ a {
   #wrap > #content5 > .briefly > .briefly_top > button {
     width: 40px;
     height: 40px;
-    background: url("/img/close_btn.png") no-repeat center center;
+    background: url("../img/close_btn.png") no-repeat center center;
     text-indent: -9999px;
     border: none;
     cursor: pointer;
